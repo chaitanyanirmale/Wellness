@@ -9,14 +9,14 @@ const sessionSchema = new mongoose.Schema({
   title: {
     type: String, 
     required: true,
-    trim: true
+    enum: ['Yoga', 'Meditation', 'Breathing']
   },
   tags: {
     type: [String],
     default: []
   },
   content: {
-    type: mongoose.Schema.Types.Mixed, 
+    type: String, 
     required: true
     },
   status: {
