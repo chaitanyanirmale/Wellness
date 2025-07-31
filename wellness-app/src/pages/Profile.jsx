@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 
 export default function Profile() {
   const { currentUser, loading } = useSelector((state) => state.user);
@@ -6,26 +7,26 @@ export default function Profile() {
   return (
     <div className='p-3 max-w-sm mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+      <form className='flex flex-col gap-4'>
         <input 
           type="text" 
           placeholder='username' 
           id='username' 
           defaultValue={currentUser.username} 
-          className='border p-3 rounded-lg' onChange={handlechange}
+          className='border p-3 rounded-lg' 
         />
         <input 
           type="email" 
           placeholder='email' 
           id='email' 
           defaultValue={currentUser.email}
-          className='border p-3 rounded-lg' onChange={handlechange}
+          className='border p-3 rounded-lg' 
         />
         <input 
           type="password" 
           placeholder='password' 
           id='password' 
-          className='border p-3 rounded-lg' onChange={handlechange}
+          className='border p-3 rounded-lg' 
         />
         <button 
           disabled={loading}
