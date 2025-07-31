@@ -7,7 +7,7 @@ const sessionSchema = new mongoose.Schema({
     required: true
   },
   title: {
-    type: String,
+    type: String, 
     required: true,
     trim: true
   },
