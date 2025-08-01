@@ -1,15 +1,10 @@
 import mongoose from 'mongoose';
 
 const sessionSchema = new mongoose.Schema({
-  id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
   title: {
     type: String, 
     required: true,
-    enum: ['Yoga', 'Meditation', 'Breathing']
+    enum: []
   },
   tags: {
     type: [String],
@@ -33,4 +28,4 @@ sessionSchema.pre('save', function (next) {
   next();
 });
 
-export default mongoose.model('Session', sessionSchema);
+export const Session =  mongoose.model('Session', sessionSchema);
