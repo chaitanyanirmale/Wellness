@@ -1,6 +1,31 @@
 import React from 'react'
+import  { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
+  
 export default function MySessions() {
+  const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(()=>{
+     const fetchSessions = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/session/my-sessions`); 
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Failed to fetch sessions');
+        setSessions(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSessions();
+  }, []);
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
@@ -40,7 +65,7 @@ export default function MySessions() {
                   to={`/update-session/${session._id}`}
                   className="text-blue-600 hover:underline"
                 >
-                  ✏️ Edit
+                  Edit
                 </Link>
                 {session.status === 'published' && (
                   <a
@@ -49,7 +74,7 @@ export default function MySessions() {
                     rel="noopener noreferrer"
                     className="text-green-600 hover:underline"
                   >
-                    🔗 View
+                  View
                   </a>
                 )}
               </div>

@@ -12,7 +12,7 @@ export default function CreateSession() {
         title: '',
         tags: [],
         content: '',
-        status: 'draft', 
+        status: '', 
     });
     
 const handleChange = (e) => {
@@ -29,8 +29,14 @@ const handleChange = (e) => {
             [e.target.id]: e.target.value,
         })
     }
+    if(e.target.id === 'status'){
+      setFormData({
+        ...formData, 
+        status: e.target.value
+      })
+    }
 };
-console.log(formData)
+// console.log(formData)
 const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -61,7 +67,7 @@ const handleSubmit = async (e) => {
   };
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Create New Wellness Session</h2>
+      <h2 className="text-2xl text-center font-semibold mb-4">Create New Wellness Session</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -102,11 +108,12 @@ const handleSubmit = async (e) => {
         <div>
           <select
             className="w-full border rounded p-2"
+            id='status'
             value={formData.status}
             onChange={handleChange}
           >
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
+            <option value="draft" >Draft</option>
+            <option value="published" >Published</option>
           </select>
         </div>
 

@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateUserFailure, updateUserStart, updateUserSuccess, deleteUserStart,
+import { updateUserFailure, updateUserStart, updateUserSuccess,
   deleteUserSuccess,
   deleteUserFailure, signOutUserStart,
-  signOutUserSuccess,
-  signOutUserFailure, } from '../redux/user/userSlice.js';
+   } from '../redux/user/userSlice.js';
 
 export default function Profile() {
-  const { currentUser, loading } = useSelector((state) => state.user);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
    const handlechange = (e) => {
     setFormData({...formData, [e.target.id]: e.target.value });
@@ -107,11 +107,20 @@ export default function Profile() {
         <Link className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95' to={"/create-session"
         }>Create Session
         </Link>
+        </form>
         <div className='flex justify-between mt-5'>
           <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>Delete Account</span>
           <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>Sign Out</span>
+          </div>
+          <p className='text-red-700 text-center mt-5'>
+            {error ? error: ''}
+          </p>
+          <p className='text-green-700 text-center mt-5'>
+            {updateSuccess ? "User updated successfully!" : ''}
+          </p>
+
+           <Link to={'/my-sessions'} className='text-green-700 w-full'>My Sessions</Link>
+           
       </div>
-        </form>
-        </div>
   )
 }

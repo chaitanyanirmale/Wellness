@@ -9,6 +9,7 @@ import PrivateRoute from './components/PrivateRoute'
 import CreateSession from './pages/CreateSession'
 import MySessions from './pages/MySessions'
 import UpdateSession from './pages/UpdateSession'
+import SingleSession from './components/SingleSession'
 
 export default function App() {
   return (
@@ -20,6 +21,8 @@ export default function App() {
         <Route path='/signup' element={<SignUp />}/>
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
+          <Route path='/my-sessions' element={<MySessions />} />
+          <Route path="/my-sessions/:id" element={<SingleSession />} />
           <Route path="/create-session" element={<CreateSession />} />
           <Route path="/update-session/:id" element={<UpdateSession />} />
         </Route>

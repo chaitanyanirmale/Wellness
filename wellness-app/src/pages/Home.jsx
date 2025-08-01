@@ -8,7 +8,12 @@ export default function Home() {
     const fetchSessions = async () => {
       try {
         const res = await fetch('/api/sessions');
-        setSessions(res.data);
+        const data = await res.json();
+          setSessions(res.data);
+          setLoading(false);
+        if(data.success === false){
+            setError(data.message);
+        }
       } catch (err) {
         console.error('Failed to fetch sessions:', err);
       } finally {
@@ -24,7 +29,7 @@ export default function Home() {
      <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-center">Published Wellness Sessions</h1>
 
-      {/* {loading ? (
+      {loading ? (
         <p className="text-center">Loading...</p>
       ) : sessions.length === 0 ? (
         <p className="text-center text-gray-600">No sessions found.</p>
@@ -40,7 +45,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-      )} */}
+      )}
     </div>
   )
 }
